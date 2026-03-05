@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adeyemi Misturah — Mobile App Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- AMBIENT BLOBS -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">AM.</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="pages/about.html">About</a></li>
+      <li><a href="pages/projects.html">Projects</a></li>
+      <li><a href="pages/contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="wrapper">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero">
+            <div class="hero-tag">Available for opportunities</div>
+            <h1>
+              <span class="name-gradient">Adeyemi<br>Misturah</span>
+            </h1>
+            <p class="hero-sub">
+              <strong>Mobile App Engineer</strong> crafting scalable, secure, and user-centric apps with
+              <strong>Flutter</strong> &amp; <strong>Native Android (Kotlin)</strong> — from fintech to food delivery.
+            </p>
+            <div class="hero-location">📍 Ogba, Lagos State, Nigeria</div>
+            <div class="hero-actions">
+              <a href="pages/projects.html" class="btn btn-primary">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+                View Work
+              </a>
+              <a href="pages/contact.html" class="btn btn-ghost">Get in Touch</a>
+              <a href="Adeyemi_Misturah_Resume.pdf" download class="btn btn-ghost">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download CV
+              </a>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card">
+              <div class="stat-num">6+</div>
+              <div class="stat-label">Years Exp.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">5K+</div>
+              <div class="stat-label">App Users</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">4+</div>
+              <div class="stat-label">Published Apps</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIGHLIGHTS -->
+    <section id="highlights">
+      <div class="container">
+        <div class="highlights-grid">
+          <div class="highlight-card">
+            <div class="icon">📱</div>
+            <h3>Cross-Platform Mobile</h3>
+            <p>Production-ready Flutter apps shipped to both Google Play Store and Apple App Store, serving thousands of active users.</p>
+          </div>
+          <div class="highlight-card">
+            <div class="icon">💳</div>
+            <h3>Fintech & Payments</h3>
+            <p>Deep expertise in virtual accounts, payment gateways, Mifare card tap-and-pay, and POS hardware integrations.</p>
+          </div>
+          <div class="highlight-card">
+            <div class="icon">⚙️</div>
+            <h3>Full-Stack Capable</h3>
+            <p>Beyond mobile — Node.js, NestJS, and Prisma backends, with experience improving API response time by ~20%.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+      <div class="container">
+        <div class="cta-inner">
+          <p class="section-label">Let's build something</p>
+          <h2 class="section-title">Have a project in mind?</h2>
+          <p>Whether you need a Flutter expert, a fintech mobile solution, or a full-stack mobile engineer — I'd love to hear about it.</p>
+          <div class="cta-actions">
+            <a href="pages/contact.html" class="btn btn-primary">Start a Conversation</a>
+            <a href="pages/about.html" class="btn btn-ghost">Learn More About Me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2025 <span>Adeyemi Misturah</span> — Lagos, Nigeria</div>
+      <div>Flutter · Kotlin · NestJS</div>
+    </footer>
+
+  </div>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const nav    = document.getElementById('navbar');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  </script>
+
+</body>
+</html>

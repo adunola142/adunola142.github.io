@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects & Experience — Adeyemi Misturah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  <style>
+
+    /* ════════════════════════════════════════
+       FEATURED CARD
+    ════════════════════════════════════════ */
+    .project-featured {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      transition: border-color .35s, transform .35s;
+    }
+    .project-featured:hover {
+      border-color: rgba(124,106,255,.45);
+      transform: translateY(-5px);
+    }
+
+    /* left body */
+    .pf-body {
+      padding: 44px 44px 44px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .pf-glow {
+      position: absolute;
+      top: -80px; left: -80px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .13;
+      pointer-events: none;
+    }
+    .pf-body h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: -.025em;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .pf-body .project-desc {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.72;
+      margin-bottom: 24px;
+      max-width: 440px;
+      position: relative;
+    }
+    .pf-body .project-pills { position: relative; margin-bottom: 28px; }
+
+    /* store badges */
+    .store-badges { display: flex; gap: 10px; flex-wrap: wrap; position: relative; }
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      font-size: .8rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: border-color .25s, color .25s, background .25s, transform .2s;
+      font-family: var(--font-body);
+    }
+    .store-badge:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      background: rgba(124,106,255,.1);
+      transform: translateY(-2px);
+    }
+
+    /* ════════════════════════════════════════
+       RIGHT PANEL — phone carousel
+    ════════════════════════════════════════ */
+    .pf-preview {
+      background: linear-gradient(160deg,#111120,#0c0c18);
+      border-left: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pf-preview::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% -10%, rgba(124,106,255,.12), transparent 65%);
+      pointer-events: none;
+    }
+
+    /* phone shell */
+    .phone {
+      width: 175px;
+      border-radius: 32px;
+      border: 2px solid rgba(255,255,255,.13);
+      background: #111;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.6),
+        0 28px 64px rgba(0,0,0,.65),
+        inset 0 1px 0 rgba(255,255,255,.07);
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+    /* dynamic island */
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      width: 52px; height: 14px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+
+    /* carousel track inside phone */
+    .carousel-track {
+      display: flex;
+      transition: transform .45s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
+    }
+    .carousel-track img {
+      width: 175px;
+      height: 370px;
+      object-fit: cover;
+      object-position: top;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    /* dot indicators */
+    .carousel-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      z-index: 5;
+    }
+    .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      cursor: pointer;
+      transition: background .3s, transform .3s;
+    }
+    .dot.active {
+      background: #fff;
+      transform: scale(1.3);
+    }
+
+    /* prev / next arrows */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      z-index: 6;
+      font-size: .7rem;
+      transition: background .2s;
+    }
+    .carousel-btn:hover { background: rgba(255,255,255,.18); }
+    .carousel-btn.prev { left: 8px; }
+    .carousel-btn.next { right: 8px; }
+
+    /* second phone (shadow) */
+    .phone-shadow {
+      width: 145px;
+      border-radius: 28px;
+      border: 2px solid rgba(255,255,255,.06);
+      background: #0e0e1a;
+      overflow: hidden;
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-40%) rotate(5deg);
+      z-index: 1;
+      opacity: .35;
+      filter: blur(1.5px);
+    }
+    .phone-shadow::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      width: 44px; height: 12px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+    .phone-shadow img {
+      width: 145px;
+      height: 310px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    /* ════════════════════════════════════════
+       SMALL CARDS
+    ════════════════════════════════════════ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 20px;
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .project-featured { grid-template-columns: 1fr; }
+      .pf-preview {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        min-height: 280px;
+        padding: 32px 20px;
+      }
+      .phone { width: 145px; }
+      .carousel-track img { width: 145px; height: 310px; }
+      .phone-shadow { display: none; }
+      .pf-body { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <nav id="navbar">
+    <a href="../index.html" class="nav-logo">AM.</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="wrapper">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-inner">
+          <p class="section-label">Built & shipped</p>
+          <h1 class="section-title">Projects &amp; Experience</h1>
+          <p class="section-desc">Real products, real users, real impact — from fintech to food delivery.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         PROJECTS
+    ══════════════════════════════════════ -->
+    <section style="padding-top:0;">
+      <div class="container">
+        <p class="section-label">Key projects</p>
+        <h2 class="section-title" style="font-size:1.8rem;margin-bottom:32px;">Things I've built</h2>
+
+        <!-- ── MACROPAY ── -->
+        <div class="project-featured">
+          <div class="pf-body">
+            <div class="pf-glow" style="background:var(--accent);"></div>
+            <div class="project-num">01 — Live on Stores</div>
+            <h3>Macropay</h3>
+            <p class="project-desc">
+              Cross-platform fintech app with virtual account creation, payment processing, airtime/data top-up,
+              and user identity verification. Built with Flutter &amp; Cubit. Live on both stores.
+            </p>
+            <div class="project-pills" style="margin-bottom:28px;">
+              <span class="pill pill-a">Flutter</span>
+              <span class="pill pill-a">Dart</span>
+              <span class="pill pill-a">Cubit</span>
+              <span class="pill pill-b">Virtual Accounts</span>
+              <span class="pill pill-b">Payment APIs</span>
+              <span class="pill pill-b">KYC Verification</span>
+            </div>
+            <div class="store-badges">
+              <a href="https://play.google.com/store/apps/details?id=macrotech.app.pay.ng&pcampaignid=web_share"
+                 target="_blank" rel="noopener" class="store-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.06-.15l11.6-6.7-2.68-2.68-10.98 9.53zm-1.18-21v20.48l11.04-10.24L2 2.76zM20.44 10.5l-2.77-1.6L14.9 12l2.77 2.1 2.8-1.62a1.4 1.4 0 0 0 0-2zm-17.26-8.26l10.98 9.54 2.68-2.68L3.24.09a2 2 0 0 0-2.06-.15z"/></svg>
+                Google Play
+              </a>
+              <a href="https://apps.apple.com/us/app/macropay/id6752791529"
+                 target="_blank" rel="noopener" class="store-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.19 1.28-2.17 3.83.03 3.02 2.65 4.03 2.68 4.04l-.06.21zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+            </div>
+          </div>
+
+          <div class="pf-preview" id="mp-preview">
+            <!-- shadow phone -->
+            <div class="phone-shadow">
+              <img src="../screenshots/mp-3.png" alt="">
+            </div>
+            <!-- main phone with carousel -->
+            <div class="phone" style="position:relative;">
+              <button class="carousel-btn prev" data-id="mp" aria-label="Previous">&#8592;</button>
+              <div class="carousel-track" id="mp-track">
+                <img src="../screenshots/mp-1.png" alt="Macropay login">
+                <img src="../screenshots/mp-2.png" alt="Macropay register">
+                <img src="../screenshots/mp-3.png" alt="Macropay dashboard">
+                <img src="../screenshots/mp-4.png" alt="Macropay services">
+                <img src="../screenshots/mp-5.png" alt="Macropay send money">
+                <img src="../screenshots/mp-6.png" alt="Macropay airtime">
+              </div>
+              <button class="carousel-btn next" data-id="mp" aria-label="Next">&#8594;</button>
+            </div>
+            <div class="carousel-dots" id="mp-dots">
+              <div class="dot active" data-id="mp" data-index="0"></div>
+              <div class="dot" data-id="mp" data-index="1"></div>
+              <div class="dot" data-id="mp" data-index="2"></div>
+              <div class="dot" data-id="mp" data-index="3"></div>
+              <div class="dot" data-id="mp" data-index="4"></div>
+              <div class="dot" data-id="mp" data-index="5"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── NOURISHED CHOICE ── -->
+        <div class="project-featured" style="margin-bottom:48px;">
+          <div class="pf-body">
+            <div class="pf-glow" style="background:#3b8ad4;"></div>
+            <div class="project-num">02 — Live on Stores</div>
+            <h3>Nourished Choice</h3>
+            <p class="project-desc">
+              End-to-end food delivery platform. Flutter mobile frontend paired with a NestJS + Prisma backend.
+              Browse categories, place orders, and pay — all in one polished app.
+            </p>
+            <div class="project-pills" style="margin-bottom:28px;">
+              <span class="pill pill-a">Flutter</span>
+              <span class="pill pill-b">NestJS</span>
+              <span class="pill pill-b">Prisma</span>
+              <span class="pill pill-c">Payment APIs</span>
+              <span class="pill pill-c">Full-Stack</span>
+            </div>
+            <div class="store-badges">
+              <a href="https://play.google.com/store/apps/details?id=app.nourishedchoice.mobile&pcampaignid=web_share"
+                 target="_blank" rel="noopener" class="store-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.06-.15l11.6-6.7-2.68-2.68-10.98 9.53zm-1.18-21v20.48l11.04-10.24L2 2.76zM20.44 10.5l-2.77-1.6L14.9 12l2.77 2.1 2.8-1.62a1.4 1.4 0 0 0 0-2zm-17.26-8.26l10.98 9.54 2.68-2.68L3.24.09a2 2 0 0 0-2.06-.15z"/></svg>
+                Google Play
+              </a>
+              <a href="https://apps.apple.com/us/app/nourished-choice/id6755403177"
+                 target="_blank" rel="noopener" class="store-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.19 1.28-2.17 3.83.03 3.02 2.65 4.03 2.68 4.04l-.06.21zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+            </div>
+          </div>
+
+          <div class="pf-preview" id="nc-preview">
+            <div class="phone-shadow">
+              <img src="../screenshots/nc-3.png" alt="">
+            </div>
+            <div class="phone" style="position:relative;">
+              <button class="carousel-btn prev" data-id="nc" aria-label="Previous">&#8592;</button>
+              <div class="carousel-track" id="nc-track">
+                <img src="../screenshots/nc-1.png" alt="Nourished Choice login">
+                <img src="../screenshots/nc-2.png" alt="Nourished Choice register">
+                <img src="../screenshots/nc-3.png" alt="Nourished Choice home">
+                <img src="../screenshots/nc-4.png" alt="Nourished Choice profile">
+                <img src="../screenshots/nc-5.png" alt="Nourished Choice orders">
+                <img src="../screenshots/nc-6.png" alt="Nourished Choice support">
+              </div>
+              <button class="carousel-btn next" data-id="nc" aria-label="Next">&#8594;</button>
+            </div>
+            <div class="carousel-dots" id="nc-dots">
+              <div class="dot active" data-id="nc" data-index="0"></div>
+              <div class="dot" data-id="nc" data-index="1"></div>
+              <div class="dot" data-id="nc" data-index="2"></div>
+              <div class="dot" data-id="nc" data-index="3"></div>
+              <div class="dot" data-id="nc" data-index="4"></div>
+              <div class="dot" data-id="nc" data-index="5"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── MORE PROJECTS ── -->
+        <p class="section-label">More projects</p>
+        <h2 class="section-title" style="font-size:1.4rem;margin-bottom:24px;">Also built</h2>
+
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="card-glow" style="background:var(--accent3);"></div>
+            <div class="project-num">03</div>
+            <h3>Android POS &amp; Tap-and-Pay</h3>
+            <p class="project-desc">Secure POS in Kotlin & Flutter. NFC Mifare card tap-and-pay, bank transfers, real-time transactions, and receipt printing.</p>
+            <div class="project-pills">
+              <span class="pill pill-a">Kotlin</span>
+              <span class="pill pill-a">Flutter</span>
+              <span class="pill pill-b">Mifare NFC</span>
+              <span class="pill pill-b">POS Hardware</span>
+              <span class="pill pill-c">Receipt Printing</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-glow" style="background:#ffbf00;"></div>
+            <div class="project-num">04</div>
+            <h3>Zippword Fintech App</h3>
+            <p class="project-desc">Mobile fintech with 5,000+ active users. Secure payment and identity verification — deployed to both major stores.</p>
+            <div class="project-pills">
+              <span class="pill pill-a">Flutter</span>
+              <span class="pill pill-b">Fintech APIs</span>
+              <span class="pill pill-c">5K+ Users</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-glow" style="background:var(--accent3);"></div>
+            <div class="project-num">05</div>
+            <h3>HalalNest</h3>
+            <p class="project-desc">App helping users locate nearby mosques and access Islamic resources. Built with Flutter as part of the Macrotel product suite.</p>
+            <div class="project-pills">
+              <span class="pill pill-a">Flutter</span>
+              <span class="pill pill-b">Maps API</span>
+              <span class="pill pill-b">Location Services</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="card-glow" style="background:var(--accent2);"></div>
+            <div class="project-num">06</div>
+            <h3>Notification-as-a-Service</h3>
+            <p class="project-desc">Multi-channel platform delivering SMS, WhatsApp, and email to 5,000+ users with role-based access control.</p>
+            <div class="project-pills">
+              <span class="pill pill-b">Node.js</span>
+              <span class="pill pill-b">Express.js</span>
+              <span class="pill pill-c">SMS · WhatsApp · Email</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         EXPERIENCE
+    ══════════════════════════════════════ -->
+    <section style="background:var(--surface);border-top:1px solid var(--border);">
+      <div class="container">
+        <p class="section-label">Career journey</p>
+        <h2 class="section-title" style="font-size:1.8rem;">Experience</h2>
+        <p class="section-desc">Building real products across fintech, e-commerce, travel, and community.</p>
+
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-meta">
+              <span class="timeline-company">Macrotech</span>
+              <span class="timeline-date">May 2025 – Present</span>
+            </div>
+            <p class="timeline-role">Mobile Application Developer</p>
+            <ul>
+              <li>Built and deployed production-ready apps using Flutter with Bloc/Cubit state management.</li>
+              <li>Integrated virtual account creation, payment processing, and user verification APIs for fintech use cases.</li>
+              <li>Developed a secure Android POS application (Kotlin & Flutter) supporting POS payments, bank transfers, Mifare smart card tap-and-pay, invoice generation and receipt printing.</li>
+              <li>Led full-stack development for an e-commerce food delivery platform using Flutter (frontend) and NestJS (backend).</li>
+              <li>Implemented tap-and-pay smart card solutions, linking Mifare cards to virtual accounts for seamless payments.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-meta">
+              <span class="timeline-company">Macrotel Innovations</span>
+              <span class="timeline-date">2023 – May 2025 · Lagos</span>
+            </div>
+            <p class="timeline-role">Junior Mobile Application Developer & Backend Developer (Node.js)</p>
+            <ul>
+              <li>Developed and maintained mobile applications using Flutter for fintech and consumer platforms.</li>
+              <li>Built backend services with Node.js and Express.js, improving API response time by ~20%.</li>
+              <li>Contributed to Zippword — a fintech app deployed to Play Store and App Store serving 5,000+ active users.</li>
+              <li>Contributed to HalalNest — a mobile app for mosque discovery and Islamic resources.</li>
+              <li>Designed and implemented secure APIs with role-based access control (Admin, Merchant, User).</li>
+              <li>Implemented authentication and authorisation using JWT and OAuth2.</li>
+              <li>Built a Notification-as-a-Service platform delivering SMS, WhatsApp, and email to 5,000+ users.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-meta">
+              <span class="timeline-company">Marksman Travels & Tours</span>
+              <span class="timeline-date">2020 – 2022</span>
+            </div>
+            <p class="timeline-role">Junior Web & Mobile Developer (Industrial Training)</p>
+            <ul>
+              <li>Developed new features for booking and travel management systems.</li>
+              <li>Assisted in building mobile applications for travellers.</li>
+              <li>Integrated third-party services including payment gateways and booking engines.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-meta">
+              <span class="timeline-company">Hsoft Interactive</span>
+              <span class="timeline-date">2019 – 2020 · Remote</span>
+            </div>
+            <p class="timeline-role">Junior Web Developer</p>
+            <ul>
+              <li>Developed and maintained responsive web pages for client projects.</li>
+              <li>Assisted with testing, deployment, and feature enhancements.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item" style="padding-bottom:0;">
+            <div class="timeline-meta">
+              <span class="timeline-company">Schelps Inc</span>
+              <span class="timeline-date">2017 – 2019</span>
+            </div>
+            <p class="timeline-role">SIWES / Industrial Training</p>
+            <ul>
+              <li>Supported the development of client-server applications.</li>
+              <li>Assisted with UI layout design and template maintenance.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2025 <span>Adeyemi Misturah</span> — Lagos, Nigeria</div>
+      <div>Flutter · Kotlin · NestJS</div>
+    </footer>
+
+  </div>
+
+  <!-- ══════════════════════════════════════
+       CAROUSEL JS  (minimal — no deps)
+  ══════════════════════════════════════ -->
+  <script>
+    // nav toggle
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navbar').classList.toggle('open');
+    });
+
+    // generic carousel controller
+    function initCarousel(id, total) {
+      let current = 0;
+      const track  = document.getElementById(`${id}-track`);
+      const dots   = document.querySelectorAll(`.dot[data-id="${id}"]`);
+      const imgW   = track.querySelector('img').offsetWidth || 175;
+
+      function goTo(n) {
+        current = (n + total) % total;
+        track.style.transform = `translateX(-${current * imgW}px)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      // arrows
+      document.querySelectorAll(`.carousel-btn[data-id="${id}"]`).forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          goTo(current + (btn.classList.contains('next') ? 1 : -1));
+        });
+      });
+
+      // dots
+      dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
+
+      // auto-advance every 3s
+      setInterval(() => goTo(current + 1), 3000);
+
+      // touch swipe
+      let startX = 0;
+      track.parentElement.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+      track.parentElement.addEventListener('touchend', e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 30) goTo(current + (diff > 0 ? 1 : -1));
+      });
+    }
+
+    // init both after images load
+    window.addEventListener('load', () => {
+      initCarousel('mp', 6);
+      initCarousel('nc', 6);
+    });
+  </script>
+
+</body>
+</html>
